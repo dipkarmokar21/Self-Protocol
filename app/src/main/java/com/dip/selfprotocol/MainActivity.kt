@@ -31,12 +31,14 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.navigation.compose.rememberNavController
 import com.dip.selfprotocol.domain.repository.SettingsRepository
 import com.dip.selfprotocol.presentation.navigation.AppNavGraph
 import com.dip.selfprotocol.presentation.theme.SelfProtocolTheme
+import com.dip.selfprotocol.util.AppLockCoordinator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
@@ -51,7 +53,7 @@ class MainActivity : FragmentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         
-        // Hide content in recent apps
+        // Default: block screenshots
         window.setFlags(
             WindowManager.LayoutParams.FLAG_SECURE,
             WindowManager.LayoutParams.FLAG_SECURE
@@ -59,6 +61,16 @@ class MainActivity : FragmentActivity() {
 
         setContent {
             val isDarkTheme by settingsRepository.isDarkTheme.collectAsState(initial = true)
+            val isScreenshotAllowed by settingsRepository.isScreenshotAllowed.collectAsState(initial = false)
+
+            // Toggle FLAG_SECURE based on screenshot setting
+            LaunchedEffect(isScreenshotAllowed) {
+                if (isScreenshotAllowed) {
+                    window.clearFlags(WindowManager.LayoutParams.FLAG_SECURE)
+                } else {
+                    window.addFlags(WindowManager.LayoutParams.FLAG_SECURE)
+                }
+            }
             
             SelfProtocolTheme(darkTheme = isDarkTheme) {
                 Surface(
@@ -77,7 +89,9 @@ class MainActivity : FragmentActivity() {
                         val observer = LifecycleEventObserver { _, event ->
                             if (hasAppLockEnabled && autoLock) {
                                 if (event == Lifecycle.Event.ON_STOP) {
-                                    isLocked = true
+                                    if (!AppLockCoordinator.isAutoLockPaused) {
+                                        isLocked = true
+                                    }
                                 }
                             }
                         }
@@ -113,24 +127,33 @@ class MainActivity : FragmentActivity() {
     fun LockScreen(correctPin: String, onUnlock: () -> Unit, isBiometricEnabled: Boolean) {
         var pinInput by remember { mutableStateOf("") }
         var error by remember { mutableStateOf(false) }
-        
-        LaunchedEffect(Unit) {
-            if (isBiometricEnabled) {
-                val biometricManager = BiometricManager.from(this@MainActivity)
-                if (biometricManager.canAuthenticate(BiometricManager.Authenticators.BIOMETRIC_STRONG) == BiometricManager.BIOMETRIC_SUCCESS) {
-                    val promptInfo = BiometricPrompt.PromptInfo.Builder()
-                        .setTitle("Unlock Self Protocol")
-                        .setSubtitle("Use your fingerprint to unlock")
-                        .setNegativeButtonText("Use PIN")
-                        .build()
-                    val biometricPrompt = BiometricPrompt(this@MainActivity, ContextCompat.getMainExecutor(this@MainActivity),
-                        object : BiometricPrompt.AuthenticationCallback() {
-                            override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
-                                super.onAuthenticationSucceeded(result)
-                                onUnlock()
-                            }
-                        })
-                    biometricPrompt.authenticate(promptInfo)
+
+        val showBiometricPrompt = {
+            val biometricManager = BiometricManager.from(this@MainActivity)
+            if (biometricManager.canAuthenticate(BiometricManager.Authenticators.BIOMETRIC_STRONG) == BiometricManager.BIOMETRIC_SUCCESS) {
+                val promptInfo = BiometricPrompt.PromptInfo.Builder()
+                    .setTitle("Unlock Self Protocol")
+                    .setSubtitle("Use your fingerprint to unlock")
+                    .setNegativeButtonText("Use PIN")
+                    .build()
+                val biometricPrompt = BiometricPrompt(this@MainActivity, ContextCompat.getMainExecutor(this@MainActivity),
+                    object : BiometricPrompt.AuthenticationCallback() {
+                        override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
+                            super.onAuthenticationSucceeded(result)
+                            onUnlock()
+                        }
+                    })
+                biometricPrompt.authenticate(promptInfo)
+            }
+        }
+
+        val lifecycleOwner = LocalLifecycleOwner.current
+        LaunchedEffect(lifecycleOwner) {
+            lifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.RESUMED) {
+                if (isBiometricEnabled) {
+                    // Small delay to ensure onSaveInstanceState has passed
+                    kotlinx.coroutines.delay(100)
+                    showBiometricPrompt()
                 }
             }
         }
@@ -169,6 +192,13 @@ class MainActivity : FragmentActivity() {
                 }
                 if (error) {
                     Text("Incorrect PIN", color = MaterialTheme.colorScheme.error)
+                }
+                
+                if (isBiometricEnabled) {
+                    Spacer(modifier = Modifier.height(24.dp))
+                    Button(onClick = showBiometricPrompt) {
+                        Text("Use Fingerprint")
+                    }
                 }
             }
         }

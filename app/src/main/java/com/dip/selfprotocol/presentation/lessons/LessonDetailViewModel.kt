@@ -5,6 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dip.selfprotocol.data.local.dao.LessonDao
 import com.dip.selfprotocol.data.local.entity.LessonEntity
+import com.dip.selfprotocol.util.DraftManager
+import com.dip.selfprotocol.util.LessonDraft
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -14,6 +16,7 @@ import javax.inject.Inject
 @HiltViewModel
 class LessonDetailViewModel @Inject constructor(
     private val lessonDao: LessonDao,
+    private val draftManager: DraftManager,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
@@ -26,10 +29,21 @@ class LessonDetailViewModel @Inject constructor(
     private val _answer = MutableStateFlow("")
     val answer = _answer.asStateFlow()
 
+    private val _hasDraft = MutableStateFlow(false)
+    val hasDraft = _hasDraft.asStateFlow()
+
     private var existingCreatedAt: Long = System.currentTimeMillis()
     private var existingIsFavorite: Boolean = false
 
+    private val draftKey: String
+        get() = if (lessonId != null) "lesson_$lessonId" else "new_$categoryId"
+
     init {
+        val draft = draftManager.getLessonDraft(draftKey)
+        if (draft != null) {
+            _hasDraft.value = true
+        }
+
         if (lessonId != null) {
             viewModelScope.launch {
                 val existingLesson = lessonDao.getAllLessonsSync().find { it.id == lessonId }
@@ -45,6 +59,28 @@ class LessonDetailViewModel @Inject constructor(
 
     fun onQuestionChange(value: String) { _question.value = value }
     fun onAnswerChange(value: String) { _answer.value = value }
+
+    fun restoreDraft() {
+        draftManager.getLessonDraft(draftKey)?.let { draft ->
+            _question.value = draft.title
+            _answer.value = draft.content
+        }
+        _hasDraft.value = false
+    }
+
+    fun discardDraft() {
+        draftManager.clearLessonDraft(draftKey)
+        _hasDraft.value = false
+    }
+
+    fun saveDraftIfNeeded() {
+        if (_question.value.isNotBlank() || _answer.value.isNotBlank()) {
+            draftManager.saveLessonDraft(
+                draftKey,
+                LessonDraft(_question.value, _answer.value)
+            )
+        }
+    }
 
     fun saveLesson(onSaved: () -> Unit) {
         viewModelScope.launch {
@@ -63,6 +99,7 @@ class LessonDetailViewModel @Inject constructor(
             } else {
                 lessonDao.insertLesson(entity)
             }
+            draftManager.clearLessonDraft(draftKey)
             onSaved()
         }
     }

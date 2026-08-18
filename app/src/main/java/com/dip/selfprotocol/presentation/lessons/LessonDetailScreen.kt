@@ -14,6 +14,10 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.activity.compose.BackHandler
+import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -26,16 +30,44 @@ fun LessonDetailScreen(
 ) {
     val question by viewModel.question.collectAsState()
     val answer by viewModel.answer.collectAsState()
+    val hasDraft by viewModel.hasDraft.collectAsState()
     
     // If it's a new lesson (id == null), start in edit mode. Else start in read mode.
     var isEditMode by remember { mutableStateOf(viewModel.lessonId == null) }
+    var showDraftDialog by remember { mutableStateOf(false) }
+
+    LaunchedEffect(hasDraft) {
+        if (hasDraft) showDraftDialog = true
+    }
+
+    val navigateBackWithSave = {
+        if (isEditMode) viewModel.saveDraftIfNeeded()
+        onNavigateBack()
+    }
+
+    val lifecycleOwner = LocalLifecycleOwner.current
+    DisposableEffect(lifecycleOwner, isEditMode) {
+        val observer = LifecycleEventObserver { _, event ->
+            if (event == Lifecycle.Event.ON_STOP && isEditMode) {
+                viewModel.saveDraftIfNeeded()
+            }
+        }
+        lifecycleOwner.lifecycle.addObserver(observer)
+        onDispose {
+            lifecycleOwner.lifecycle.removeObserver(observer)
+        }
+    }
+
+    BackHandler {
+        navigateBackWithSave()
+    }
 
     Scaffold(
         topBar = {
             TopAppBar(
                 title = { },
                 navigationIcon = {
-                    IconButton(onClick = onNavigateBack) {
+                    IconButton(onClick = navigateBackWithSave) {
                         Icon(Icons.Default.ArrowBack, contentDescription = "Back")
                     }
                 },
@@ -72,6 +104,7 @@ fun LessonDetailScreen(
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(paddingValues)
+                        .imePadding()
                         .padding(24.dp)
                         .verticalScroll(rememberScrollState())
                 ) {
@@ -107,6 +140,7 @@ fun LessonDetailScreen(
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(paddingValues)
+                        .imePadding()
                         .verticalScroll(rememberScrollState())
                 ) {
                     Card(
@@ -163,5 +197,30 @@ fun LessonDetailScreen(
                 }
             }
         }
+    }
+
+    if (showDraftDialog) {
+        AlertDialog(
+            onDismissRequest = { showDraftDialog = false },
+            title = { Text("Unsaved Draft Found") },
+            text = { Text("Do you want to restore your unsaved changes or discard them?") },
+            confirmButton = {
+                Button(onClick = {
+                    viewModel.restoreDraft()
+                    showDraftDialog = false
+                    isEditMode = true
+                }) {
+                    Text("Restore")
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = {
+                    viewModel.discardDraft()
+                    showDraftDialog = false
+                }) {
+                    Text("Discard")
+                }
+            }
+        )
     }
 }

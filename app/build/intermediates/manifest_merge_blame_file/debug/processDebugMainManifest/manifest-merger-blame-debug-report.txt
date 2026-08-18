@@ -28,7 +28,7 @@
 19-->[androidx.core:core:1.12.0] C:\Users\Dip karmokar\.gradle\caches\9.0-milestone-1\transforms\cb00e32ec036b2c1000d7244c6b40832\transformed\core-1.12.0\AndroidManifest.xml:26:22-94
 20
 21    <application
-21-->G:\self protocol\app\src\main\AndroidManifest.xml:7:5-28:19
+21-->G:\self protocol\app\src\main\AndroidManifest.xml:7:5-29:19
 22        android:name="com.dip.selfprotocol.SelfProtocolApp"
 22-->G:\self protocol\app\src\main\AndroidManifest.xml:8:9-40
 23        android:allowBackup="false"
@@ -51,26 +51,27 @@
 32-->G:\self protocol\app\src\main\AndroidManifest.xml:14:9-54
 33        android:supportsRtl="true"
 33-->G:\self protocol\app\src\main\AndroidManifest.xml:15:9-35
-34        android:testOnly="true"
-35        android:theme="@style/Theme.SelfProtocol" >
-35-->G:\self protocol\app\src\main\AndroidManifest.xml:16:9-50
-36        <activity
-36-->G:\self protocol\app\src\main\AndroidManifest.xml:19:9-27:20
-37            android:name="com.dip.selfprotocol.MainActivity"
-37-->G:\self protocol\app\src\main\AndroidManifest.xml:20:13-41
-38            android:exported="true"
-38-->G:\self protocol\app\src\main\AndroidManifest.xml:21:13-36
-39            android:theme="@style/Theme.SelfProtocol" >
-39-->G:\self protocol\app\src\main\AndroidManifest.xml:22:13-54
+34        android:theme="@style/Theme.SelfProtocol" >
+34-->G:\self protocol\app\src\main\AndroidManifest.xml:16:9-50
+35        <activity
+35-->G:\self protocol\app\src\main\AndroidManifest.xml:19:9-28:20
+36            android:name="com.dip.selfprotocol.MainActivity"
+36-->G:\self protocol\app\src\main\AndroidManifest.xml:20:13-41
+37            android:exported="true"
+37-->G:\self protocol\app\src\main\AndroidManifest.xml:21:13-36
+38            android:theme="@style/Theme.SelfProtocol"
+38-->G:\self protocol\app\src\main\AndroidManifest.xml:23:13-54
+39            android:windowSoftInputMode="adjustResize" >
+39-->G:\self protocol\app\src\main\AndroidManifest.xml:22:13-55
 40            <intent-filter>
-40-->G:\self protocol\app\src\main\AndroidManifest.xml:23:13-26:29
+40-->G:\self protocol\app\src\main\AndroidManifest.xml:24:13-27:29
 41                <action android:name="android.intent.action.MAIN" />
-41-->G:\self protocol\app\src\main\AndroidManifest.xml:24:17-69
-41-->G:\self protocol\app\src\main\AndroidManifest.xml:24:25-66
+41-->G:\self protocol\app\src\main\AndroidManifest.xml:25:17-69
+41-->G:\self protocol\app\src\main\AndroidManifest.xml:25:25-66
 42
 43                <category android:name="android.intent.category.LAUNCHER" />
-43-->G:\self protocol\app\src\main\AndroidManifest.xml:25:17-77
-43-->G:\self protocol\app\src\main\AndroidManifest.xml:25:27-74
+43-->G:\self protocol\app\src\main\AndroidManifest.xml:26:17-77
+43-->G:\self protocol\app\src\main\AndroidManifest.xml:26:27-74
 44            </intent-filter>
 45        </activity>
 46        <activity

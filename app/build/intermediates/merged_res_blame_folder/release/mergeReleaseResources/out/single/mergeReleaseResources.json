@@ -1,86 +1,94 @@
 [
     {
-        "merged": "com.dip.selfprotocol.app-release-62:/mipmap-xhdpi_ic_launcher_foreground.webp.flat",
-        "source": "com.dip.selfprotocol.app-main-63:/mipmap-xhdpi/ic_launcher_foreground.webp"
+        "merged": "C:\\Users\\Dip karmokar\\.gradle\\daemon\\9.0-milestone-1\\com.dip.selfprotocol.app-release-62:\\mipmap-hdpi_ic_launcher_foreground.webp.flat",
+        "source": "C:\\Users\\Dip karmokar\\.gradle\\daemon\\9.0-milestone-1\\com.dip.selfprotocol.app-main-63:\\mipmap-hdpi\\ic_launcher_foreground.webp"
     },
     {
-        "merged": "com.dip.selfprotocol.app-release-62:/mipmap-anydpi-v26_ic_launcher.xml.flat",
-        "source": "com.dip.selfprotocol.app-main-63:/mipmap-anydpi-v26/ic_launcher.xml"
+        "merged": "C:\\Users\\Dip karmokar\\.gradle\\daemon\\9.0-milestone-1\\com.dip.selfprotocol.app-release-62:\\mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\Dip karmokar\\.gradle\\daemon\\9.0-milestone-1\\com.dip.selfprotocol.app-main-63:\\mipmap-xxxhdpi\\ic_launcher.webp"
     },
     {
-        "merged": "com.dip.selfprotocol.app-release-62:/mipmap-xxhdpi_ic_launcher_foreground.webp.flat",
-        "source": "com.dip.selfprotocol.app-main-63:/mipmap-xxhdpi/ic_launcher_foreground.webp"
+        "merged": "C:\\Users\\Dip karmokar\\.gradle\\daemon\\9.0-milestone-1\\com.dip.selfprotocol.app-release-62:\\xml_backup_rules.xml.flat",
+        "source": "C:\\Users\\Dip karmokar\\.gradle\\daemon\\9.0-milestone-1\\com.dip.selfprotocol.app-main-63:\\xml\\backup_rules.xml"
     },
     {
-        "merged": "com.dip.selfprotocol.app-release-62:/mipmap-hdpi_ic_launcher.webp.flat",
-        "source": "com.dip.selfprotocol.app-main-63:/mipmap-hdpi/ic_launcher.webp"
+        "merged": "C:\\Users\\Dip karmokar\\.gradle\\daemon\\9.0-milestone-1\\com.dip.selfprotocol.app-release-62:\\mipmap-xhdpi_ic_launcher_foreground.webp.flat",
+        "source": "C:\\Users\\Dip karmokar\\.gradle\\daemon\\9.0-milestone-1\\com.dip.selfprotocol.app-main-63:\\mipmap-xhdpi\\ic_launcher_foreground.webp"
     },
     {
-        "merged": "com.dip.selfprotocol.app-release-62:/mipmap-xxxhdpi_ic_launcher.webp.flat",
-        "source": "com.dip.selfprotocol.app-main-63:/mipmap-xxxhdpi/ic_launcher.webp"
+        "merged": "C:\\Users\\Dip karmokar\\.gradle\\daemon\\9.0-milestone-1\\com.dip.selfprotocol.app-release-62:\\mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\Dip karmokar\\.gradle\\daemon\\9.0-milestone-1\\com.dip.selfprotocol.app-main-63:\\mipmap-xxhdpi\\ic_launcher.webp"
     },
     {
-        "merged": "com.dip.selfprotocol.app-release-62:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
-        "source": "com.dip.selfprotocol.app-main-63:/mipmap-xxxhdpi/ic_launcher_round.webp"
+        "merged": "C:\\Users\\Dip karmokar\\.gradle\\daemon\\9.0-milestone-1\\com.dip.selfprotocol.app-release-62:\\drawable_ic_launcher_foreground.xml.flat",
+        "source": "C:\\Users\\Dip karmokar\\.gradle\\daemon\\9.0-milestone-1\\com.dip.selfprotocol.app-main-63:\\drawable\\ic_launcher_foreground.xml"
     },
     {
-        "merged": "com.dip.selfprotocol.app-release-62:/mipmap-mdpi_ic_launcher_round.webp.flat",
-        "source": "com.dip.selfprotocol.app-main-63:/mipmap-mdpi/ic_launcher_round.webp"
+        "merged": "C:\\Users\\Dip karmokar\\.gradle\\daemon\\9.0-milestone-1\\com.dip.selfprotocol.app-release-62:\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "C:\\Users\\Dip karmokar\\.gradle\\daemon\\9.0-milestone-1\\com.dip.selfprotocol.app-main-63:\\mipmap-anydpi-v26\\ic_launcher_round.xml"
     },
     {
-        "merged": "com.dip.selfprotocol.app-release-62:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
-        "source": "com.dip.selfprotocol.app-main-63:/mipmap-xxhdpi/ic_launcher_round.webp"
+        "merged": "C:\\Users\\Dip karmokar\\.gradle\\daemon\\9.0-milestone-1\\com.dip.selfprotocol.app-release-62:\\mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\Dip karmokar\\.gradle\\daemon\\9.0-milestone-1\\com.dip.selfprotocol.app-main-63:\\mipmap-hdpi\\ic_launcher.webp"
     },
     {
-        "merged": "com.dip.selfprotocol.app-release-62:/mipmap-xhdpi_ic_launcher.webp.flat",
-        "source": "com.dip.selfprotocol.app-main-63:/mipmap-xhdpi/ic_launcher.webp"
+        "merged": "C:\\Users\\Dip karmokar\\.gradle\\daemon\\9.0-milestone-1\\com.dip.selfprotocol.app-release-62:\\mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\Dip karmokar\\.gradle\\daemon\\9.0-milestone-1\\com.dip.selfprotocol.app-main-63:\\mipmap-mdpi\\ic_launcher.webp"
     },
     {
-        "merged": "com.dip.selfprotocol.app-release-62:/mipmap-mdpi_ic_launcher_foreground.webp.flat",
-        "source": "com.dip.selfprotocol.app-main-63:/mipmap-mdpi/ic_launcher_foreground.webp"
+        "merged": "C:\\Users\\Dip karmokar\\.gradle\\daemon\\9.0-milestone-1\\com.dip.selfprotocol.app-release-62:\\mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "C:\\Users\\Dip karmokar\\.gradle\\daemon\\9.0-milestone-1\\com.dip.selfprotocol.app-main-63:\\mipmap-anydpi-v26\\ic_launcher.xml"
     },
     {
-        "merged": "com.dip.selfprotocol.app-release-62:/mipmap-xxhdpi_ic_launcher.webp.flat",
-        "source": "com.dip.selfprotocol.app-main-63:/mipmap-xxhdpi/ic_launcher.webp"
+        "merged": "C:\\Users\\Dip karmokar\\.gradle\\daemon\\9.0-milestone-1\\com.dip.selfprotocol.app-release-62:\\mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\Dip karmokar\\.gradle\\daemon\\9.0-milestone-1\\com.dip.selfprotocol.app-main-63:\\mipmap-xhdpi\\ic_launcher_round.webp"
     },
     {
-        "merged": "com.dip.selfprotocol.app-release-62:/mipmap-xhdpi_ic_launcher_round.webp.flat",
-        "source": "com.dip.selfprotocol.app-main-63:/mipmap-xhdpi/ic_launcher_round.webp"
+        "merged": "C:\\Users\\Dip karmokar\\.gradle\\daemon\\9.0-milestone-1\\com.dip.selfprotocol.app-release-62:\\drawable_ic_launcher_background.xml.flat",
+        "source": "C:\\Users\\Dip karmokar\\.gradle\\daemon\\9.0-milestone-1\\com.dip.selfprotocol.app-main-63:\\drawable\\ic_launcher_background.xml"
     },
     {
-        "merged": "com.dip.selfprotocol.app-release-62:/mipmap-xxxhdpi_ic_launcher_foreground.webp.flat",
-        "source": "com.dip.selfprotocol.app-main-63:/mipmap-xxxhdpi/ic_launcher_foreground.webp"
+        "merged": "C:\\Users\\Dip karmokar\\.gradle\\daemon\\9.0-milestone-1\\com.dip.selfprotocol.app-release-62:\\xml_data_extraction_rules.xml.flat",
+        "source": "C:\\Users\\Dip karmokar\\.gradle\\daemon\\9.0-milestone-1\\com.dip.selfprotocol.app-main-63:\\xml\\data_extraction_rules.xml"
     },
     {
-        "merged": "com.dip.selfprotocol.app-release-62:/mipmap-hdpi_ic_launcher_foreground.webp.flat",
-        "source": "com.dip.selfprotocol.app-main-63:/mipmap-hdpi/ic_launcher_foreground.webp"
+        "merged": "C:\\Users\\Dip karmokar\\.gradle\\daemon\\9.0-milestone-1\\com.dip.selfprotocol.app-release-62:\\mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\Dip karmokar\\.gradle\\daemon\\9.0-milestone-1\\com.dip.selfprotocol.app-main-63:\\mipmap-xhdpi\\ic_launcher.webp"
     },
     {
-        "merged": "com.dip.selfprotocol.app-release-62:/mipmap-hdpi_ic_launcher_round.webp.flat",
-        "source": "com.dip.selfprotocol.app-main-63:/mipmap-hdpi/ic_launcher_round.webp"
+        "merged": "C:\\Users\\Dip karmokar\\.gradle\\daemon\\9.0-milestone-1\\com.dip.selfprotocol.app-release-62:\\mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\Dip karmokar\\.gradle\\daemon\\9.0-milestone-1\\com.dip.selfprotocol.app-main-63:\\mipmap-xxhdpi\\ic_launcher_round.webp"
     },
     {
-        "merged": "com.dip.selfprotocol.app-release-62:/xml_backup_rules.xml.flat",
-        "source": "com.dip.selfprotocol.app-main-63:/xml/backup_rules.xml"
+        "merged": "com.dip.selfprotocol.app-release-62:/drawable_ic_github.xml.flat",
+        "source": "com.dip.selfprotocol.app-main-63:/drawable/ic_github.xml"
     },
     {
-        "merged": "com.dip.selfprotocol.app-release-62:/mipmap-mdpi_ic_launcher.webp.flat",
-        "source": "com.dip.selfprotocol.app-main-63:/mipmap-mdpi/ic_launcher.webp"
+        "merged": "C:\\Users\\Dip karmokar\\.gradle\\daemon\\9.0-milestone-1\\com.dip.selfprotocol.app-release-62:\\mipmap-xxhdpi_ic_launcher_foreground.webp.flat",
+        "source": "C:\\Users\\Dip karmokar\\.gradle\\daemon\\9.0-milestone-1\\com.dip.selfprotocol.app-main-63:\\mipmap-xxhdpi\\ic_launcher_foreground.webp"
     },
     {
-        "merged": "com.dip.selfprotocol.app-release-62:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
-        "source": "com.dip.selfprotocol.app-main-63:/mipmap-anydpi-v26/ic_launcher_round.xml"
+        "merged": "C:\\Users\\Dip karmokar\\.gradle\\daemon\\9.0-milestone-1\\com.dip.selfprotocol.app-release-62:\\mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\Dip karmokar\\.gradle\\daemon\\9.0-milestone-1\\com.dip.selfprotocol.app-main-63:\\mipmap-mdpi\\ic_launcher_round.webp"
     },
     {
-        "merged": "com.dip.selfprotocol.app-release-62:/drawable_ic_launcher_foreground.xml.flat",
-        "source": "com.dip.selfprotocol.app-main-63:/drawable/ic_launcher_foreground.xml"
+        "merged": "C:\\Users\\Dip karmokar\\.gradle\\daemon\\9.0-milestone-1\\com.dip.selfprotocol.app-release-62:\\mipmap-xxxhdpi_ic_launcher_foreground.webp.flat",
+        "source": "C:\\Users\\Dip karmokar\\.gradle\\daemon\\9.0-milestone-1\\com.dip.selfprotocol.app-main-63:\\mipmap-xxxhdpi\\ic_launcher_foreground.webp"
     },
     {
-        "merged": "com.dip.selfprotocol.app-release-62:/drawable_ic_launcher_background.xml.flat",
-        "source": "com.dip.selfprotocol.app-main-63:/drawable/ic_launcher_background.xml"
+        "merged": "com.dip.selfprotocol.app-release-62:/drawable_ic_linkedin.xml.flat",
+        "source": "com.dip.selfprotocol.app-main-63:/drawable/ic_linkedin.xml"
     },
     {
-        "merged": "com.dip.selfprotocol.app-release-62:/xml_data_extraction_rules.xml.flat",
-        "source": "com.dip.selfprotocol.app-main-63:/xml/data_extraction_rules.xml"
+        "merged": "C:\\Users\\Dip karmokar\\.gradle\\daemon\\9.0-milestone-1\\com.dip.selfprotocol.app-release-62:\\mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\Dip karmokar\\.gradle\\daemon\\9.0-milestone-1\\com.dip.selfprotocol.app-main-63:\\mipmap-xxxhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\Dip karmokar\\.gradle\\daemon\\9.0-milestone-1\\com.dip.selfprotocol.app-release-62:\\mipmap-mdpi_ic_launcher_foreground.webp.flat",
+        "source": "C:\\Users\\Dip karmokar\\.gradle\\daemon\\9.0-milestone-1\\com.dip.selfprotocol.app-main-63:\\mipmap-mdpi\\ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "C:\\Users\\Dip karmokar\\.gradle\\daemon\\9.0-milestone-1\\com.dip.selfprotocol.app-release-62:\\mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\Dip karmokar\\.gradle\\daemon\\9.0-milestone-1\\com.dip.selfprotocol.app-main-63:\\mipmap-hdpi\\ic_launcher_round.webp"
     }
 ]

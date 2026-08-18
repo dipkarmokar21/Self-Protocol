@@ -19,6 +19,8 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material.icons.filled.SelectAll
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
@@ -64,6 +66,7 @@ fun CategoriesScreen(
 
     var showAddDialog by remember { mutableStateOf(false) }
     var showDeleteDialog by remember { mutableStateOf(false) }
+    var showRenameDialog by remember { mutableStateOf<Int?>(null) }
 
     Scaffold(
         topBar = {
@@ -76,6 +79,14 @@ fun CategoriesScreen(
                         }
                     },
                     actions = {
+                        IconButton(onClick = { viewModel.selectAll() }) {
+                            Icon(Icons.Default.SelectAll, contentDescription = "Select All")
+                        }
+                        if (selectedIds.size == 1) {
+                            IconButton(onClick = { showRenameDialog = selectedIds.first() }) {
+                                Icon(Icons.Default.Edit, contentDescription = "Rename")
+                            }
+                        }
                         IconButton(onClick = { showDeleteDialog = true }) {
                             Icon(Icons.Default.Delete, contentDescription = "Delete Selected")
                         }
@@ -187,6 +198,38 @@ fun CategoriesScreen(
             },
             dismissButton = {
                 TextButton(onClick = { showDeleteDialog = false }) {
+                    Text("Cancel")
+                }
+            }
+        )
+    }
+
+    showRenameDialog?.let { categoryIdToRename ->
+        val cat = categories.find { it.category.id == categoryIdToRename }?.category
+        var renameText by remember { mutableStateOf(cat?.name ?: "") }
+        AlertDialog(
+            onDismissRequest = { showRenameDialog = null },
+            title = { Text("Rename Category") },
+            text = {
+                OutlinedTextField(
+                    value = renameText,
+                    onValueChange = { renameText = it },
+                    label = { Text("New Name") },
+                    singleLine = true
+                )
+            },
+            confirmButton = {
+                Button(onClick = {
+                    if (renameText.isNotBlank()) {
+                        viewModel.renameCategory(categoryIdToRename, renameText)
+                        showRenameDialog = null
+                    }
+                }) {
+                    Text("Rename")
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = { showRenameDialog = null }) {
                     Text("Cancel")
                 }
             }

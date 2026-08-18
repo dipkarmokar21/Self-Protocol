@@ -17,4 +17,7 @@ interface SettingsRepository {
     
     val autoLock: Flow<Boolean>
     suspend fun setAutoLock(enabled: Boolean)
+
+    val isScreenshotAllowed: Flow<Boolean>
+    suspend fun setScreenshotAllowed(allowed: Boolean)
 }

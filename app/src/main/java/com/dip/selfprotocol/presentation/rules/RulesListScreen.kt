@@ -7,17 +7,21 @@ import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.ui.graphics.Color
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.ContentCopy
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Rule
+import androidx.compose.material.icons.filled.SelectAll
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -26,6 +30,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.dip.selfprotocol.data.local.dao.CategoryWithCount
 import com.dip.selfprotocol.data.local.entity.RuleEntity
 import com.dip.selfprotocol.presentation.components.EmptyState
 import com.dip.selfprotocol.util.bounceClick
@@ -43,14 +48,14 @@ fun RulesListScreen(
 ) {
     val rules by viewModel.rules.collectAsState()
     val searchQuery by viewModel.searchQuery.collectAsState()
-    val listState = rememberLazyListState()
     val selectedIds by viewModel.selectedRuleIds.collectAsState()
+    val targetCategories by viewModel.targetCategories.collectAsState()
     val isSelectionMode = selectedIds.isNotEmpty()
 
-    val sheetState = rememberModalBottomSheetState()
-    val coroutineScope = rememberCoroutineScope()
-    var selectedRuleForAction by remember { mutableStateOf<RuleEntity?>(null) }
+    val listState = rememberLazyListState()
     var showDeleteDialog by remember { mutableStateOf(false) }
+    var showMoveDialog by remember { mutableStateOf(false) }
+    var showCopyDialog by remember { mutableStateOf(false) }
 
     Scaffold(
         topBar = {
@@ -69,6 +74,15 @@ fun RulesListScreen(
                 },
                 actions = {
                     if (isSelectionMode) {
+                        IconButton(onClick = { viewModel.selectAll() }) {
+                            Icon(Icons.Default.SelectAll, contentDescription = "Select All")
+                        }
+                        IconButton(onClick = { showMoveDialog = true }) {
+                            Icon(Icons.AutoMirrored.Filled.ArrowForward, contentDescription = "Move")
+                        }
+                        IconButton(onClick = { showCopyDialog = true }) {
+                            Icon(Icons.Default.ContentCopy, contentDescription = "Copy")
+                        }
                         IconButton(onClick = { showDeleteDialog = true }) {
                             Icon(Icons.Default.Delete, contentDescription = "Delete Selected", tint = MaterialTheme.colorScheme.error)
                         }
@@ -172,14 +186,76 @@ fun RulesListScreen(
                 }
             },
             dismissButton = {
-                TextButton(onClick = { 
-                    showDeleteDialog = false
-                }) {
+                TextButton(onClick = { showDeleteDialog = false }) {
                     Text("Cancel")
                 }
             }
         )
     }
+
+    if (showMoveDialog) {
+        CategorySelectionDialog(
+            title = "Move Rules",
+            categories = targetCategories,
+            currentCategoryId = viewModel.categoryId,
+            onDismiss = { showMoveDialog = false },
+            onCategorySelected = { targetId ->
+                viewModel.moveSelectedRules(targetId)
+                showMoveDialog = false
+            }
+        )
+    }
+
+    if (showCopyDialog) {
+        CategorySelectionDialog(
+            title = "Copy Rules",
+            categories = targetCategories,
+            currentCategoryId = viewModel.categoryId,
+            onDismiss = { showCopyDialog = false },
+            onCategorySelected = { targetId ->
+                viewModel.copySelectedRules(targetId)
+                showCopyDialog = false
+            }
+        )
+    }
+}
+
+@Composable
+fun CategorySelectionDialog(
+    title: String,
+    categories: List<CategoryWithCount>,
+    currentCategoryId: Int,
+    onDismiss: () -> Unit,
+    onCategorySelected: (Int) -> Unit
+) {
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text(title) },
+        text = {
+            LazyColumn {
+                items(categories.filter { it.category.id != currentCategoryId }) { catWithCount ->
+                    Text(
+                        text = catWithCount.category.name,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clickable { onCategorySelected(catWithCount.category.id) }
+                            .padding(16.dp),
+                        style = MaterialTheme.typography.bodyLarge
+                    )
+                }
+                if (categories.filter { it.category.id != currentCategoryId }.isEmpty()) {
+                    item {
+                        Text("No other categories available.", modifier = Modifier.padding(16.dp))
+                    }
+                }
+            }
+        },
+        confirmButton = {
+            TextButton(onClick = onDismiss) {
+                Text("Cancel")
+            }
+        }
+    )
 }
 
 private val DateFormatter = SimpleDateFormat("MMM dd, yyyy", Locale.getDefault())

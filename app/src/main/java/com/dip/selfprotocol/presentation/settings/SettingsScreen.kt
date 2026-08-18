@@ -1,9 +1,14 @@
 package com.dip.selfprotocol.presentation.settings
 
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.widget.Toast
+import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -11,6 +16,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -37,9 +43,15 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.dip.selfprotocol.R
+import com.dip.selfprotocol.util.AppLockCoordinator
+
+private const val GITHUB_PROFILE_URL = "https://github.com/dipkarmokar21"
+private const val LINKEDIN_PROFILE_URL = "https://www.linkedin.com/in/dipkarmokar"
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -52,6 +64,7 @@ fun SettingsScreen(
     val isBiometricEnabled by viewModel.isBiometricEnabled.collectAsState(initial = false)
     val autoLock by viewModel.autoLock.collectAsState(initial = true)
     val pin by viewModel.pin.collectAsState(initial = null)
+    val isScreenshotAllowed by viewModel.isScreenshotAllowed.collectAsState(initial = false)
     
     val exportResult by viewModel.exportResult.collectAsState()
     val importResult by viewModel.importResult.collectAsState()
@@ -62,14 +75,11 @@ fun SettingsScreen(
     var pinInput by remember { mutableStateOf("") }
     
     var showImportConfirmDialog by remember { mutableStateOf(false) }
-    var importUriToConfirm by remember { mutableStateOf<android.net.Uri?>(null) }
-
-    val exportLauncher = rememberLauncherForActivityResult(ActivityResultContracts.CreateDocument("application/octet-stream")) { uri ->
-        uri?.let { viewModel.exportData(it) }
-    }
+    var importUriToConfirm by remember { mutableStateOf<Uri?>(null) }
 
     val importLauncher = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
-        uri?.let { 
+        AppLockCoordinator.resumeAutoLock()
+        uri?.let {
             importUriToConfirm = it
             showImportConfirmDialog = true
         }
@@ -152,22 +162,43 @@ fun SettingsScreen(
                 )
             }
 
+            SettingsSwitch(
+                title = "Allow Screenshot",
+                checked = isScreenshotAllowed,
+                onCheckedChange = viewModel::setScreenshotAllowed
+            )
+
             SettingsCategoryTitle("Backup")
             SettingsItem(
                 title = "Export Pack",
-                subtitle = "Export to an encrypted .ejson file",
-                onClick = { exportLauncher.launch("SelfProtocol_Backup.ejson") }
+                subtitle = "Save encrypted .ejson to Downloads",
+                onClick = {
+                    Log.d("SettingsScreen", "Direct export requested")
+                    viewModel.exportDataToDownloads()
+                }
             )
             SettingsItem(
                 title = "Import Pack",
                 subtitle = "Restore from an encrypted .ejson file",
-                onClick = { importLauncher.launch(arrayOf("application/octet-stream", "*/*")) }
+                onClick = {
+                    AppLockCoordinator.pauseAutoLock()
+                    try {
+                        importLauncher.launch(arrayOf("application/octet-stream", "*/*"))
+                    } catch (e: Exception) {
+                        AppLockCoordinator.resumeAutoLock()
+                        Toast.makeText(context, "Could not open file picker: ${e.message}", Toast.LENGTH_LONG).show()
+                    }
+                }
             )
             
             SettingsCategoryTitle("About")
+            CreatorLinksItem(
+                onGitHubClick = { openExternalUrl(context, GITHUB_PROFILE_URL) },
+                onLinkedInClick = { openExternalUrl(context, LINKEDIN_PROFILE_URL) }
+            )
             SettingsItem(
                 title = "Version",
-                subtitle = "1.0.0",
+                subtitle = "1.0.1",
                 onClick = {}
             )
             SettingsItem(
@@ -235,6 +266,14 @@ fun SettingsScreen(
     }
 }
 
+private fun openExternalUrl(context: Context, url: String) {
+    try {
+        context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+    } catch (e: Exception) {
+        Toast.makeText(context, "Could not open link", Toast.LENGTH_SHORT).show()
+    }
+}
+
 @Composable
 fun SettingsCategoryTitle(title: String) {
     Text(
@@ -267,6 +306,48 @@ fun SettingsSwitch(
             checked = checked,
             onCheckedChange = onCheckedChange
         )
+    }
+}
+
+@Composable
+fun CreatorLinksItem(
+    onGitHubClick: () -> Unit,
+    onLinkedInClick: () -> Unit
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp, vertical = 16.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Column(modifier = Modifier.weight(1f)) {
+            Text(
+                text = "Created by",
+                style = MaterialTheme.typography.bodyLarge
+            )
+            Spacer(modifier = Modifier.height(4.dp))
+            Text(
+                text = "Dip Karmokar",
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+        }
+        Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+            IconButton(onClick = onGitHubClick) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_github),
+                    contentDescription = "GitHub",
+                    modifier = Modifier.size(24.dp)
+                )
+            }
+            IconButton(onClick = onLinkedInClick) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_linkedin),
+                    contentDescription = "LinkedIn",
+                    modifier = Modifier.size(24.dp)
+                )
+            }
+        }
     }
 }
 

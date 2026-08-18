@@ -78,4 +78,19 @@ class CategoriesViewModel @Inject constructor(
         }
     }
 
+    fun selectAll() {
+        val currentIds = categories.value.map { it.category.id }.toSet()
+        _selectedCategoryIds.value = currentIds
+    }
+
+    fun renameCategory(id: Int, newName: String) {
+        viewModelScope.launch {
+            val cat = categories.value.find { it.category.id == id }?.category
+            if (cat != null) {
+                categoryDao.updateCategory(cat.copy(name = newName))
+                clearSelection()
+            }
+        }
+    }
+
 }

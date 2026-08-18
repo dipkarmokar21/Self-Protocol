@@ -29,6 +29,7 @@ import com.dip.selfprotocol.presentation.rules.RulesViewModel;
 import com.dip.selfprotocol.presentation.rules.RulesViewModel_HiltModules;
 import com.dip.selfprotocol.presentation.settings.SettingsViewModel;
 import com.dip.selfprotocol.presentation.settings.SettingsViewModel_HiltModules;
+import com.dip.selfprotocol.util.DraftManager;
 import com.dip.selfprotocol.util.ExportImportManager;
 import dagger.hilt.android.ActivityRetainedLifecycle;
 import dagger.hilt.android.ViewModelLifecycle;
@@ -413,33 +414,33 @@ public final class DaggerSelfProtocolApp_HiltComponents_SingletonC {
     private static final class LazyClassKeyProvider {
       static String com_dip_selfprotocol_presentation_lessons_LessonsViewModel = "com.dip.selfprotocol.presentation.lessons.LessonsViewModel";
 
-      static String com_dip_selfprotocol_presentation_settings_SettingsViewModel = "com.dip.selfprotocol.presentation.settings.SettingsViewModel";
-
-      static String com_dip_selfprotocol_presentation_rules_RulesViewModel = "com.dip.selfprotocol.presentation.rules.RulesViewModel";
+      static String com_dip_selfprotocol_presentation_lessons_LessonDetailViewModel = "com.dip.selfprotocol.presentation.lessons.LessonDetailViewModel";
 
       static String com_dip_selfprotocol_presentation_rules_RuleDetailViewModel = "com.dip.selfprotocol.presentation.rules.RuleDetailViewModel";
 
-      static String com_dip_selfprotocol_presentation_lessons_LessonDetailViewModel = "com.dip.selfprotocol.presentation.lessons.LessonDetailViewModel";
+      static String com_dip_selfprotocol_presentation_rules_RulesViewModel = "com.dip.selfprotocol.presentation.rules.RulesViewModel";
 
       static String com_dip_selfprotocol_presentation_categories_CategoriesViewModel = "com.dip.selfprotocol.presentation.categories.CategoriesViewModel";
+
+      static String com_dip_selfprotocol_presentation_settings_SettingsViewModel = "com.dip.selfprotocol.presentation.settings.SettingsViewModel";
 
       @KeepFieldType
       LessonsViewModel com_dip_selfprotocol_presentation_lessons_LessonsViewModel2;
 
       @KeepFieldType
-      SettingsViewModel com_dip_selfprotocol_presentation_settings_SettingsViewModel2;
-
-      @KeepFieldType
-      RulesViewModel com_dip_selfprotocol_presentation_rules_RulesViewModel2;
+      LessonDetailViewModel com_dip_selfprotocol_presentation_lessons_LessonDetailViewModel2;
 
       @KeepFieldType
       RuleDetailViewModel com_dip_selfprotocol_presentation_rules_RuleDetailViewModel2;
 
       @KeepFieldType
-      LessonDetailViewModel com_dip_selfprotocol_presentation_lessons_LessonDetailViewModel2;
+      RulesViewModel com_dip_selfprotocol_presentation_rules_RulesViewModel2;
 
       @KeepFieldType
       CategoriesViewModel com_dip_selfprotocol_presentation_categories_CategoriesViewModel2;
+
+      @KeepFieldType
+      SettingsViewModel com_dip_selfprotocol_presentation_settings_SettingsViewModel2;
     }
   }
 
@@ -501,32 +502,32 @@ public final class DaggerSelfProtocolApp_HiltComponents_SingletonC {
 
     @IdentifierNameString
     private static final class LazyClassKeyProvider {
+      static String com_dip_selfprotocol_presentation_rules_RulesViewModel = "com.dip.selfprotocol.presentation.rules.RulesViewModel";
+
+      static String com_dip_selfprotocol_presentation_lessons_LessonsViewModel = "com.dip.selfprotocol.presentation.lessons.LessonsViewModel";
+
+      static String com_dip_selfprotocol_presentation_rules_RuleDetailViewModel = "com.dip.selfprotocol.presentation.rules.RuleDetailViewModel";
+
       static String com_dip_selfprotocol_presentation_lessons_LessonDetailViewModel = "com.dip.selfprotocol.presentation.lessons.LessonDetailViewModel";
 
       static String com_dip_selfprotocol_presentation_categories_CategoriesViewModel = "com.dip.selfprotocol.presentation.categories.CategoriesViewModel";
 
-      static String com_dip_selfprotocol_presentation_rules_RulesViewModel = "com.dip.selfprotocol.presentation.rules.RulesViewModel";
-
-      static String com_dip_selfprotocol_presentation_rules_RuleDetailViewModel = "com.dip.selfprotocol.presentation.rules.RuleDetailViewModel";
-
-      static String com_dip_selfprotocol_presentation_lessons_LessonsViewModel = "com.dip.selfprotocol.presentation.lessons.LessonsViewModel";
-
       static String com_dip_selfprotocol_presentation_settings_SettingsViewModel = "com.dip.selfprotocol.presentation.settings.SettingsViewModel";
+
+      @KeepFieldType
+      RulesViewModel com_dip_selfprotocol_presentation_rules_RulesViewModel2;
+
+      @KeepFieldType
+      LessonsViewModel com_dip_selfprotocol_presentation_lessons_LessonsViewModel2;
+
+      @KeepFieldType
+      RuleDetailViewModel com_dip_selfprotocol_presentation_rules_RuleDetailViewModel2;
 
       @KeepFieldType
       LessonDetailViewModel com_dip_selfprotocol_presentation_lessons_LessonDetailViewModel2;
 
       @KeepFieldType
       CategoriesViewModel com_dip_selfprotocol_presentation_categories_CategoriesViewModel2;
-
-      @KeepFieldType
-      RulesViewModel com_dip_selfprotocol_presentation_rules_RulesViewModel2;
-
-      @KeepFieldType
-      RuleDetailViewModel com_dip_selfprotocol_presentation_rules_RuleDetailViewModel2;
-
-      @KeepFieldType
-      LessonsViewModel com_dip_selfprotocol_presentation_lessons_LessonsViewModel2;
 
       @KeepFieldType
       SettingsViewModel com_dip_selfprotocol_presentation_settings_SettingsViewModel2;
@@ -557,16 +558,16 @@ public final class DaggerSelfProtocolApp_HiltComponents_SingletonC {
           return (T) new CategoriesViewModel(singletonCImpl.categoryDao(), viewModelCImpl.savedStateHandle);
 
           case 1: // com.dip.selfprotocol.presentation.lessons.LessonDetailViewModel 
-          return (T) new LessonDetailViewModel(singletonCImpl.lessonDao(), viewModelCImpl.savedStateHandle);
+          return (T) new LessonDetailViewModel(singletonCImpl.lessonDao(), singletonCImpl.draftManagerProvider.get(), viewModelCImpl.savedStateHandle);
 
           case 2: // com.dip.selfprotocol.presentation.lessons.LessonsViewModel 
-          return (T) new LessonsViewModel(singletonCImpl.lessonDao(), viewModelCImpl.savedStateHandle);
+          return (T) new LessonsViewModel(singletonCImpl.lessonDao(), singletonCImpl.categoryDao(), viewModelCImpl.savedStateHandle);
 
           case 3: // com.dip.selfprotocol.presentation.rules.RuleDetailViewModel 
-          return (T) new RuleDetailViewModel(singletonCImpl.ruleDao(), viewModelCImpl.savedStateHandle);
+          return (T) new RuleDetailViewModel(singletonCImpl.ruleDao(), singletonCImpl.draftManagerProvider.get(), viewModelCImpl.savedStateHandle);
 
           case 4: // com.dip.selfprotocol.presentation.rules.RulesViewModel 
-          return (T) new RulesViewModel(singletonCImpl.ruleDao(), viewModelCImpl.savedStateHandle);
+          return (T) new RulesViewModel(singletonCImpl.ruleDao(), singletonCImpl.categoryDao(), viewModelCImpl.savedStateHandle);
 
           case 5: // com.dip.selfprotocol.presentation.settings.SettingsViewModel 
           return (T) new SettingsViewModel(singletonCImpl.provideSettingsRepositoryProvider.get(), viewModelCImpl.exportImportManager());
@@ -655,6 +656,8 @@ public final class DaggerSelfProtocolApp_HiltComponents_SingletonC {
 
     private Provider<SelfProtocolDatabase> provideDatabaseProvider;
 
+    private Provider<DraftManager> draftManagerProvider;
+
     private SingletonCImpl(ApplicationContextModule applicationContextModuleParam) {
       this.applicationContextModule = applicationContextModuleParam;
       initialize(applicationContextModuleParam);
@@ -677,6 +680,7 @@ public final class DaggerSelfProtocolApp_HiltComponents_SingletonC {
     private void initialize(final ApplicationContextModule applicationContextModuleParam) {
       this.provideSettingsRepositoryProvider = DoubleCheck.provider(new SwitchingProvider<SettingsRepository>(singletonCImpl, 0));
       this.provideDatabaseProvider = DoubleCheck.provider(new SwitchingProvider<SelfProtocolDatabase>(singletonCImpl, 1));
+      this.draftManagerProvider = DoubleCheck.provider(new SwitchingProvider<DraftManager>(singletonCImpl, 2));
     }
 
     @Override
@@ -717,6 +721,9 @@ public final class DaggerSelfProtocolApp_HiltComponents_SingletonC {
 
           case 1: // com.dip.selfprotocol.data.local.SelfProtocolDatabase 
           return (T) DatabaseModule_ProvideDatabaseFactory.provideDatabase(ApplicationContextModule_ProvideContextFactory.provideContext(singletonCImpl.applicationContextModule));
+
+          case 2: // com.dip.selfprotocol.util.DraftManager 
+          return (T) new DraftManager(ApplicationContextModule_ProvideContextFactory.provideContext(singletonCImpl.applicationContextModule));
 
           default: throw new AssertionError(id);
         }

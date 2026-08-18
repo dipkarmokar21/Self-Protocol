@@ -71,4 +71,9 @@ class SettingsRepositoryImpl(
     override suspend fun setAutoLock(enabled: Boolean) {
         sharedPreferences.edit().putBoolean("AUTO_LOCK", enabled).apply()
     }
+
+    override val isScreenshotAllowed: Flow<Boolean> = getFlowForBoolean("SCREENSHOT_ALLOWED", false)
+    override suspend fun setScreenshotAllowed(allowed: Boolean) {
+        sharedPreferences.edit().putBoolean("SCREENSHOT_ALLOWED", allowed).apply()
+    }
 }

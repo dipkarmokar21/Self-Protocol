@@ -2,6 +2,7 @@ package com.dip.selfprotocol.presentation.lessons;
 
 import androidx.lifecycle.SavedStateHandle;
 import com.dip.selfprotocol.data.local.dao.LessonDao;
+import com.dip.selfprotocol.util.DraftManager;
 import dagger.internal.DaggerGenerated;
 import dagger.internal.Factory;
 import dagger.internal.QualifierMetadata;
@@ -26,26 +27,31 @@ import javax.inject.Provider;
 public final class LessonDetailViewModel_Factory implements Factory<LessonDetailViewModel> {
   private final Provider<LessonDao> lessonDaoProvider;
 
+  private final Provider<DraftManager> draftManagerProvider;
+
   private final Provider<SavedStateHandle> savedStateHandleProvider;
 
   public LessonDetailViewModel_Factory(Provider<LessonDao> lessonDaoProvider,
+      Provider<DraftManager> draftManagerProvider,
       Provider<SavedStateHandle> savedStateHandleProvider) {
     this.lessonDaoProvider = lessonDaoProvider;
+    this.draftManagerProvider = draftManagerProvider;
     this.savedStateHandleProvider = savedStateHandleProvider;
   }
 
   @Override
   public LessonDetailViewModel get() {
-    return newInstance(lessonDaoProvider.get(), savedStateHandleProvider.get());
+    return newInstance(lessonDaoProvider.get(), draftManagerProvider.get(), savedStateHandleProvider.get());
   }
 
   public static LessonDetailViewModel_Factory create(Provider<LessonDao> lessonDaoProvider,
+      Provider<DraftManager> draftManagerProvider,
       Provider<SavedStateHandle> savedStateHandleProvider) {
-    return new LessonDetailViewModel_Factory(lessonDaoProvider, savedStateHandleProvider);
+    return new LessonDetailViewModel_Factory(lessonDaoProvider, draftManagerProvider, savedStateHandleProvider);
   }
 
-  public static LessonDetailViewModel newInstance(LessonDao lessonDao,
+  public static LessonDetailViewModel newInstance(LessonDao lessonDao, DraftManager draftManager,
       SavedStateHandle savedStateHandle) {
-    return new LessonDetailViewModel(lessonDao, savedStateHandle);
+    return new LessonDetailViewModel(lessonDao, draftManager, savedStateHandle);
   }
 }

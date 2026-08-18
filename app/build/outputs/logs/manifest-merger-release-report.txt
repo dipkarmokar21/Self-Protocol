@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from G:\self protocol\app\src\main\AndroidManifest.xml:2:1-29:12
-INJECTED from G:\self protocol\app\src\main\AndroidManifest.xml:2:1-29:12
-INJECTED from G:\self protocol\app\src\main\AndroidManifest.xml:2:1-29:12
-INJECTED from G:\self protocol\app\src\main\AndroidManifest.xml:2:1-29:12
+ADDED from G:\self protocol\app\src\main\AndroidManifest.xml:2:1-30:12
+INJECTED from G:\self protocol\app\src\main\AndroidManifest.xml:2:1-30:12
+INJECTED from G:\self protocol\app\src\main\AndroidManifest.xml:2:1-30:12
+INJECTED from G:\self protocol\app\src\main\AndroidManifest.xml:2:1-30:12
 MERGED from [androidx.biometric:biometric:1.1.0] C:\Users\Dip karmokar\.gradle\caches\9.0-milestone-1\transforms\1a8661227e366d6422534d8b06058c7c\transformed\biometric-1.1.0\AndroidManifest.xml:17:1-29:12
 MERGED from [androidx.appcompat:appcompat:1.2.0] C:\Users\Dip karmokar\.gradle\caches\9.0-milestone-1\transforms\452e2d448976a3a3d420dcf9db86d079\transformed\appcompat-1.2.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.hilt:hilt-navigation-compose:1.2.0] C:\Users\Dip karmokar\.gradle\caches\9.0-milestone-1\transforms\451cf518af5bd74bd4ee04e4f01b534e\transformed\hilt-navigation-compose-1.2.0\AndroidManifest.xml:2:1-7:12
@@ -92,8 +92,8 @@ MERGED from [androidx.biometric:biometric:1.1.0] C:\Users\Dip karmokar\.gradle\c
 	android:name
 		ADDED from G:\self protocol\app\src\main\AndroidManifest.xml:5:22-69
 application
-ADDED from G:\self protocol\app\src\main\AndroidManifest.xml:7:5-28:19
-INJECTED from G:\self protocol\app\src\main\AndroidManifest.xml:7:5-28:19
+ADDED from G:\self protocol\app\src\main\AndroidManifest.xml:7:5-29:19
+INJECTED from G:\self protocol\app\src\main\AndroidManifest.xml:7:5-29:19
 MERGED from [androidx.emoji2:emoji2:1.3.0] C:\Users\Dip karmokar\.gradle\caches\9.0-milestone-1\transforms\e72ca70723cd511db19f3282cd6b2829\transformed\emoji2-1.3.0\AndroidManifest.xml:23:5-33:19
 MERGED from [androidx.emoji2:emoji2:1.3.0] C:\Users\Dip karmokar\.gradle\caches\9.0-milestone-1\transforms\e72ca70723cd511db19f3282cd6b2829\transformed\emoji2-1.3.0\AndroidManifest.xml:23:5-33:19
 MERGED from [androidx.lifecycle:lifecycle-process:2.7.0] C:\Users\Dip karmokar\.gradle\caches\9.0-milestone-1\transforms\c5b69117ce45d3577573809d85fb3fe1\transformed\lifecycle-process-2.7.0\AndroidManifest.xml:23:5-33:19
@@ -135,23 +135,25 @@ MERGED from [androidx.startup:startup-runtime:1.1.1] C:\Users\Dip karmokar\.grad
 	android:name
 		ADDED from G:\self protocol\app\src\main\AndroidManifest.xml:8:9-40
 activity#com.dip.selfprotocol.MainActivity
-ADDED from G:\self protocol\app\src\main\AndroidManifest.xml:19:9-27:20
+ADDED from G:\self protocol\app\src\main\AndroidManifest.xml:19:9-28:20
+	android:windowSoftInputMode
+		ADDED from G:\self protocol\app\src\main\AndroidManifest.xml:22:13-55
 	android:exported
 		ADDED from G:\self protocol\app\src\main\AndroidManifest.xml:21:13-36
 	android:theme
-		ADDED from G:\self protocol\app\src\main\AndroidManifest.xml:22:13-54
+		ADDED from G:\self protocol\app\src\main\AndroidManifest.xml:23:13-54
 	android:name
 		ADDED from G:\self protocol\app\src\main\AndroidManifest.xml:20:13-41
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from G:\self protocol\app\src\main\AndroidManifest.xml:23:13-26:29
+ADDED from G:\self protocol\app\src\main\AndroidManifest.xml:24:13-27:29
 action#android.intent.action.MAIN
-ADDED from G:\self protocol\app\src\main\AndroidManifest.xml:24:17-69
+ADDED from G:\self protocol\app\src\main\AndroidManifest.xml:25:17-69
 	android:name
-		ADDED from G:\self protocol\app\src\main\AndroidManifest.xml:24:25-66
+		ADDED from G:\self protocol\app\src\main\AndroidManifest.xml:25:25-66
 category#android.intent.category.LAUNCHER
-ADDED from G:\self protocol\app\src\main\AndroidManifest.xml:25:17-77
+ADDED from G:\self protocol\app\src\main\AndroidManifest.xml:26:17-77
 	android:name
-		ADDED from G:\self protocol\app\src\main\AndroidManifest.xml:25:27-74
+		ADDED from G:\self protocol\app\src\main\AndroidManifest.xml:26:27-74
 uses-sdk
 INJECTED from G:\self protocol\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from G:\self protocol\app\src\main\AndroidManifest.xml
