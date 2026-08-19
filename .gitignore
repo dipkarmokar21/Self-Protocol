@@ -37,5 +37,6 @@ google-services.json
 
 # AI / agent files
 .agents/
+app/release/
 
 

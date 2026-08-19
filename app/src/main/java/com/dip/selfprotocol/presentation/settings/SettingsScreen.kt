@@ -198,7 +198,7 @@ fun SettingsScreen(
             )
             SettingsItem(
                 title = "Version",
-                subtitle = "1.0.1",
+                subtitle = "1.0.0",
                 onClick = {}
             )
             SettingsItem(
