@@ -34,4 +34,7 @@ google-services.json
 *.hprof
 selfp.jks
 selfp.txt
+.idea
+.agents
+
 
